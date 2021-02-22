@@ -1,0 +1,22 @@
+<table id="_appendHere" class="table mydatatable" style="width: 100%">
+  <thead class=" text-primary">
+    <th>
+      Symbol
+    </th>
+    <th>
+      Crossover Type
+    </th>
+    <th>
+      Crossover Time
+    </th>
+  </thead>
+  <tbody>
+    {% for index, row in data %}
+    <tr>
+      <td>{{row.symbol}}</td>
+      <td>{{row.Crossover_Type}}</td>
+      <td>{{row.Crossover_Time}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

@@ -1,0 +1,91 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Tables {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css"> -->
+
+
+{% endblock stylesheets %}
+
+{% block content %}
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Moving Average Insights</h4>
+                  <p class="card-category"></p>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table id="_appendHere" class="table mydatatable" style="width: 100%">
+                      <thead class=" text-primary">
+                        <th>
+                          Symbol
+                        </th>
+                        <th>
+                          Crossover Type
+                        </th>
+                        <th>
+                          Crossover Time
+                        </th>
+                      </thead>
+                      <tbody>
+                        {% for index, row in data %}
+                        <tr>
+                          <td>{{row.symbol}}</td>
+                          <td>{{row.Crossover_Type}}</td>
+                          <td>{{row.Crossover_Time}}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="row">
+                    <a href="/download?type=csv"><button class="btn btn-primary">Download 90days data (CSV)</button></a>
+                    <a href="/download?type=excel"><button class="btn btn-primary">Download 90days data (Excel)</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+
+ 
+<script>
+  var table = $('.mydatatable').DataTable({
+    lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]]
+  });
+  setInterval(function() {
+      $.ajax({
+          type: "GET",
+          url: "get_more_tables.html"  
+          
+      })
+      .done(function(response) {
+        var value = $('.dataTables_filter input').val();
+        table.destroy();
+        $('#_appendHere').replaceWith(response);
+        table = $('.mydatatable').DataTable({
+		lengthMenu: [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
+                "oSearch": {"sSearch": value}
+	});
+      });
+  }, 10000)
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+
+{% endblock javascripts %}

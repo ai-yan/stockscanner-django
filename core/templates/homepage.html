@@ -1,0 +1,42 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>My Stock Scans</title>
+
+        <style>            
+            html { 
+                background: url('{% static 'media/back_home.jpg' %}') no-repeat center center fixed; 
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+          </style>
+    </head>
+    <body>
+        <div>
+            <br>
+            <h3>
+            <p>MyStockScans (MSS) delivers active stock and options traders an edge in identifying critical points to enter or exit positions.  We all have our watchlists and tools but frequently miss opportunities we just don’t track and evaluate fast enough.  As an active options trader, I needed more data at critical times to increase the number and success rate of my trades.</p>
+            <p>Thus, MSS was born!  MSS is free, easy to use and delivers you simple moving average(SMA) crossovers as they happen.</p>
+            <p>
+            <table>
+                <tr>
+                    <td><img src="{% static 'media/1.png' %}" width="50" height="50"></td>
+                    <td><h3>Choose your Stocks/ETFs</h3></td>
+                </tr>
+                <tr>
+                    <td><img src="{% static 'media/2.png' %}" width="50" height="50"></td>
+                    <td><h3>Choose your minute-based SMAs</h3></td>
+                </tr>
+                <tr>
+                    <td><img src="{% static 'media/3.png' %}" width="50" height="50"></td>
+                    <td><h3>Receive Alerts in real-time as SMA crossovers occur</h3></td>
+                </tr>
+            </table>
+            </h3><a href="/ui-tables.html"><img src="{% static 'media/register.png' %}" width="150" height="70"></a>
+            </p>
+        </div>
+    </body>
+</html>

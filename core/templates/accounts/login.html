@@ -1,0 +1,111 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Login {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<style>
+  /* #backgroud {
+  background-image: url("https://img.freepik.com/free-vector/business-candle-stick-graph-chart-stock-market_41981-1435.jpg");
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center; 
+  } */
+
+  #background {
+    position: relative;
+    background: #fff;
+    overflow: hidden;
+  }
+  #background h5 {
+      padding: 50px;
+      position: relative;
+      z-index: 2;
+      
+  }
+  /* You could use :after - it doesn't really matter */
+  #background:before {
+      content: ' ';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0.3;
+      background-image: url('https://img.freepik.com/free-vector/business-candle-stick-graph-chart-stock-market_41981-1435.jpg');
+      background-repeat: no-repeat;
+      background-position: 50% 80%;
+      background-size: cover;
+  }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">
+            Login/Register
+          </h4>
+        </div>
+        <div class="card-body">
+
+          <h6 class="card-category">
+              {% if msg %}
+                <span class="text-danger">{{ msg }}</span>
+              {% else %}
+                  
+              {% endif %}  
+          </h6>
+          
+          <br />
+
+          <form role="form" method="post" action="">
+              
+            {% csrf_token %} 
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Username</label>
+                  {{ form.username }}
+                </div>
+              </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Password</label>
+                  {{ form.password }}
+                </div>
+              </div>
+            </div>
+
+            <br />
+
+            <button type="submit" name="login" class="btn btn-primary pull-left">Login</button>
+
+            &nbsp; &nbsp; 
+            <span class="pull-right">
+              Don't have an account? <a href="{% url 'register' %}" class="text-primary">Create</a>
+            </span>
+
+            <div class="clearfix"></div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
